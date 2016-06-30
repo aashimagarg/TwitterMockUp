@@ -58,4 +58,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="140"
+        android:textColor="#55acee"
+        android:textSize="16sp"
+        android:id="@+id/tvCount"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

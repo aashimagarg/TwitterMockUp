@@ -29,6 +29,7 @@
         android:textColor="#000"
         android:id="@+id/tvBody"
         android:paddingBottom="3dp"
+        android:maxLength="140"
         android:layout_below="@+id/tvFullName"
         android:layout_toRightOf="@+id/ivImage"
         android:layout_toEndOf="@+id/ivImage" />

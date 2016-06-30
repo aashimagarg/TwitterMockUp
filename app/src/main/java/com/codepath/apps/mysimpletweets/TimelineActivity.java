@@ -127,13 +127,16 @@ public class TimelineActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         //return from compose
-        if (requestCode == COMPOSE_REQUEST_CODE || resultCode == RESULT_OK){
+        if (requestCode == COMPOSE_REQUEST_CODE && resultCode == RESULT_OK){
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
             // Inside `onActivityResult` in the main `TweetsActivity`
             // Pass new tweet into the home timeline and add to top of the list
             HomeTimelineFragment fragmentHomeTweets =
                     (HomeTimelineFragment) spPager.getRegisteredFragment(0);
             fragmentHomeTweets.appendTweet(tweet);
+
+        }
+        if (requestCode == COMPOSE_REQUEST_CODE && resultCode == RESULT_CANCELED){
 
         }
 

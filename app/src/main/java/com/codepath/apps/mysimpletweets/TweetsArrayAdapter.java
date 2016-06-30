@@ -69,7 +69,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
             public void onClick(View v) {
 
                 if (ivProfileImage != null) {
-                    // Fire an intent when a contact is selected
+                    // Fire an intent when a photo is selected
                     Intent i = new Intent(v.getContext(), ProfileActivity.class);
                     // Pass contact object in the bundle and populate details activity.
                     i.putExtra("screen_name", tweet.getUser().getScreenName());
