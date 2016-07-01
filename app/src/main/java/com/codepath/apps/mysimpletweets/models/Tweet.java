@@ -28,6 +28,7 @@ public class Tweet {
     public String createdAt;
     public boolean isRetweeted;
     public boolean isFavorited;
+    public String media;
 
     public Tweet(){
     }
@@ -44,6 +45,8 @@ public class Tweet {
             tweet.isFavorited = jsonObject.getBoolean("favorited");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            JSONArray media = jsonObject.getJSONObject("entities").getJSONArray("media");
+            tweet.media = media.getJSONObject(0).getString("media_url");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -96,6 +99,11 @@ public class Tweet {
     public boolean isFavorited() {
         return isFavorited;
     }
+
+    public String getMedia() {
+        return media;
+    }
+
 
 
 

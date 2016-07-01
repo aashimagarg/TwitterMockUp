@@ -57,6 +57,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
         TextView tvTime = (TextView) convertView.findViewById(R.id.tvTimeStamp);
         Button btnReply = (Button) convertView.findViewById(R.id.btnReply);
+        ImageView ivMedia = (ImageView) convertView.findViewById(R.id.ivMedia);
         final Button btnRetweet = (Button) convertView.findViewById(R.id.btnRetweet);
         final Button btnLike = (Button) convertView.findViewById(R.id.btnLike);
 
@@ -74,6 +75,16 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
 
         ivProfileImage.setImageResource(android.R.color.transparent);
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
+
+        //showing images of tweets - very hacky way.
+        if (tweet.getMedia() != null){
+            ivMedia.getLayoutParams().height = 400;
+            Picasso.with(getContext()).load(tweet.getMedia()).transform(new RoundedCornersTransformation(3, 3)).into(ivMedia);
+        } else {
+            ivMedia.setImageResource(0);
+            ivMedia.getLayoutParams().height = 0;
+
+        }
 
         if (tweet.isRetweeted()){
             btnRetweet.setBackgroundResource(R.drawable.retweet_action_on);

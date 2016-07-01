@@ -63,11 +63,11 @@
         android:layout_height="20dp"
         android:id="@+id/btnReply"
         android:background="@drawable/reply_action"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/ivMedia"
         android:layout_marginRight="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_alignLeft="@+id/tvBody"
-        android:layout_alignStart="@+id/tvBody" />
+        android:layout_alignLeft="@+id/ivMedia"
+        android:layout_alignStart="@+id/ivMedia" />
 
     <Button
         android:layout_width="20dp"
@@ -88,5 +88,18 @@
         android:layout_alignTop="@+id/btnRetweet"
         android:layout_toRightOf="@+id/btnRetweet"
         android:layout_toEndOf="@+id/btnRetweet" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/ivMedia"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/tvBody"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_alignStart="@+id/tvBody"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
 
 </RelativeLayout>
