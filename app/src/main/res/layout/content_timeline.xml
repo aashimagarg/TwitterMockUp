@@ -13,6 +13,10 @@
         android:id="@+id/tabs"
         app:pstsShouldExpand="true"
         app:pstsTextAllCaps="true"
+        app:pstsDividerColor="@android:color/transparent"
+        android:background="#FFFF"
+        android:textColor="#55acee"
+        app:pstsIndicatorColor="#55acee"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
 

@@ -81,7 +81,7 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	//GET favorites/list
-	public void getLikesTimeline(String screenName, AsyncHttpResponseHandler handler){
+	public void getLikesTimeline(JsonHttpResponseHandler handler){
 		String apiUrl = getApiUrl("favorites/list.json");
 		//Execute the request
 		getClient().get(apiUrl, null, handler);
