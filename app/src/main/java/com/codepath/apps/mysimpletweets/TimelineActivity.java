@@ -121,6 +121,7 @@ public class TimelineActivity extends AppCompatActivity {
     public void onProfileView(MenuItem mi){
         //Launch the profile view
         Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("screen_name", user.getScreenName());
         startActivity(i);
     }
 

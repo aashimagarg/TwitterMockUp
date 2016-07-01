@@ -21,6 +21,17 @@ public class LikeTimelineFragment extends TweetsListFragment {
 
     private TwitterClient client;
 
+
+    // Creates a new fragment given an int and title
+    // DemoFragment.newInstance(5, "Hello");
+    public static LikeTimelineFragment newInstance(String screen_name) {
+        LikeTimelineFragment likeFragment = new LikeTimelineFragment();
+        Bundle args = new Bundle();
+        args.putString("screen_name", screen_name);
+        likeFragment.setArguments(args);
+        return likeFragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +42,7 @@ public class LikeTimelineFragment extends TweetsListFragment {
     //Send an API request to get Timeline Json
     //fill the listview by creating the tweet objects form the Json
     private void populateTimeline() {
-        client.getLikesTimeline(new JsonHttpResponseHandler() {
+        client.getLikesTimeline((getArguments().getString("screen_name")), new JsonHttpResponseHandler() {
             //SUCCESS
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {

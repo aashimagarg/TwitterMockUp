@@ -81,10 +81,13 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	//GET favorites/list
-	public void getLikesTimeline(JsonHttpResponseHandler handler){
+	public void getLikesTimeline(String screenName, JsonHttpResponseHandler handler){
 		String apiUrl = getApiUrl("favorites/list.json");
+		//Specify the params
+		RequestParams params = new RequestParams();
+		params.put("screen_name", screenName);
 		//Execute the request
-		getClient().get(apiUrl, null, handler);
+		getClient().get(apiUrl, params, handler);
 	}
 
 	//POST statuses/update

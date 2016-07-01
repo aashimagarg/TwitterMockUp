@@ -14,6 +14,7 @@ public class User {
     public long uid;
     public String screenName;
     public String profileImageUrl;
+    public String profileBannerUrl;
     public String tagline;
     public int followersCount;
     public int followingsCount;
@@ -33,6 +34,7 @@ public class User {
             user.tagline = jsonObject.getString("description");
             user.followersCount = jsonObject.getInt("followers_count");
             user.followingsCount = jsonObject.getInt("friends_count");
+            user.profileBannerUrl = jsonObject.getString("profile_banner_url");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -66,5 +68,9 @@ public class User {
 
     public int getFollowingsCount() {
         return followingsCount;
+    }
+
+    public String getProfileBannerUrl() {
+        return profileBannerUrl;
     }
 }
