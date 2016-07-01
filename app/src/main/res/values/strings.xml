@@ -13,5 +13,6 @@
     <string name="newtweet">What\'s Happening?</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="tweet">Tweet</string>
 
 </resources>

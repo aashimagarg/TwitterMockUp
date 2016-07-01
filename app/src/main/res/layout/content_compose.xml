@@ -37,10 +37,10 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/btnCancel"
+        android:background="@drawable/ic_cancel"
         android:onClick="onCancel"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -52,20 +52,30 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/submit"
+        android:text="@string/tweet"
+        android:textAllCaps="false"
         android:onClick="onSubmitTweet"
         android:id="@+id/btnSubmit"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:background="#55acee"
+        android:textColor="#FFFF"
+        android:layout_below="@+id/etTweet"
+        android:layout_alignRight="@+id/ivProfileImage"
+        android:layout_alignEnd="@+id/ivProfileImage" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="140"
-        android:textColor="#55acee"
+        android:textColor="#65666A"
         android:textSize="16sp"
         android:id="@+id/tvCount"
-        android:layout_above="@+id/btnSubmit"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/etTweet"
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:layout_alignBottom="@+id/btnSubmit" />
+
+
 
 </RelativeLayout>

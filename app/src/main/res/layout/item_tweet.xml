@@ -58,4 +58,35 @@
         android:layout_toRightOf="@+id/tvFullName"
         android:layout_toEndOf="@+id/tvFullName" />
 
+    <Button
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/btnReply"
+        android:background="@drawable/reply_action"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_alignStart="@+id/tvBody" />
+
+    <Button
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/retweet_action"
+        android:id="@+id/btnRetweet"
+        android:layout_alignTop="@+id/btnReply"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_toRightOf="@+id/btnReply"
+        android:layout_toEndOf="@+id/btnReply" />
+
+    <Button
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:id="@+id/btnLike"
+        android:background="@drawable/like_action"
+        android:layout_alignTop="@+id/btnRetweet"
+        android:layout_toRightOf="@+id/btnRetweet"
+        android:layout_toEndOf="@+id/btnRetweet" />
+
 </RelativeLayout>

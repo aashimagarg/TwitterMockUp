@@ -26,6 +26,8 @@ public class Tweet {
     public long uid; //unique id for the tweet
     public User user;
     public String createdAt;
+    public boolean isRetweeted;
+    public boolean isFavorited;
 
     public Tweet(){
     }
@@ -38,6 +40,8 @@ public class Tweet {
         try {
             tweet.body = jsonObject.getString("text");
             tweet.uid = jsonObject.getLong("id");
+            tweet.isRetweeted = jsonObject.getBoolean("retweeted");
+            tweet.isFavorited = jsonObject.getBoolean("favorited");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         } catch (JSONException e) {
@@ -85,6 +89,16 @@ public class Tweet {
         return user;
     }
 
+    public boolean isRetweeted() {
+        return isRetweeted;
+    }
+
+    public boolean isFavorited() {
+        return isFavorited;
+    }
+
+
+
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public String getRelativeTimeAgo(String rawJsonDate) {
         String twitterTime;
@@ -121,5 +135,7 @@ public class Tweet {
 
         return reldate;
     }
+
+
 
 }

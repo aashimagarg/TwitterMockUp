@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+import com.codepath.apps.mysimpletweets.models.User;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -29,6 +30,7 @@ import org.w3c.dom.Text;
 import java.io.Serializable;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ComposeActivity extends AppCompatActivity {
     TwitterClient client;
@@ -37,6 +39,7 @@ public class ComposeActivity extends AppCompatActivity {
     ImageView ivProfilePic;
     TextView tvCount;
     Tweet tweet;
+    User user;
     static int MAX_COUNT = 140;
 
 
@@ -46,11 +49,13 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
+        user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
+
         ivProfilePic = (ImageView) findViewById(R.id.ivProfileImage);
         etTweet = (EditText) findViewById(R.id.etTweet);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         tvCount = (TextView) findViewById(R.id.tvCount);
-
+        Picasso.with(this).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfilePic);
 
         // Attached Listener to Edit Text Widget
         etTweet.addTextChangedListener(new TextWatcher() {
@@ -62,6 +67,9 @@ public class ComposeActivity extends AppCompatActivity {
                 // Display Remaining Character with respective color
                 int count = MAX_COUNT - s.length();
                 tvCount.setText(Integer.toString(count));
+                if (s.length() > 120){
+                    tvCount.setTextColor(Color.RED);
+                }
             }
         });
 

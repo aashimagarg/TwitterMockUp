@@ -3,9 +3,52 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    Overview
+
+    In Android, the common "pull to refresh" UX concept is not built in to a ListView. However, many Android applications would like to make use of this concept for their feeds. This is useful for all sorts of feeds such as a Twitter timeline. This effect can be achieved using either the SwipeRefreshLayout from the support library, which was recently introduced and back-ported to all versions down to Android API level 4.
+
+
+
+    Using SwipeRefreshLayout
+
+    SwipeRefreshLayout is a ViewGroup that can hold only one scrollable view as a child. This can be either a ScrollView or an AdapterView such as a ListView or a RecyclerView.
+
+    Note: This layout only exists within more recent versions of support-v4 as explained in this post. Edit your app/build.gradle file to include a support library later than version 19:
+
+    apply plugin: 'com.android.application'
+
+    //...
+
+    dependencies {
+    // ...
+    compile 'com.android.support:support-v4:23.1.1'
+    }
+    Make sure your support library is up to date through the Android Studio SDK Manager:
+
+    Open the SDK Manager from Android Studio with Tools -> Android -> SDK Manager
+    The support library is under "Extras"
+    Once you have a recent version support library installed (v22 or higher), then we can safely continue.
+
+    ListView with SwipeRefreshLayout
+
+    Step 1: Wrap ListView
+
+    We can use this by first wrapping the scrollable view with a SwipeRefreshLayout in the XML layout:
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvTweets" />
+        android:id="@+id/lvTweets" >
+    </ListView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

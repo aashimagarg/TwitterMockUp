@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
@@ -79,6 +80,13 @@ public class TwitterClient extends OAuthBaseClient {
 		getClient().get(apiUrl, params, handler);
 	}
 
+	//GET favorites/list
+	public void getLikesTimeline(String screenName, AsyncHttpResponseHandler handler){
+		String apiUrl = getApiUrl("favorites/list.json");
+		//Execute the request
+		getClient().get(apiUrl, null, handler);
+	}
+
 	//POST statuses/update
 	public void postUpdate(String tweet, AsyncHttpResponseHandler handler){
 		String apiUrl = getApiUrl("statuses/update.json");
@@ -90,12 +98,12 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	//GET statuses/verify_credentials
-	public void getMyInfo(AsyncHttpResponseHandler handler){
+	public void getMyInfo(JsonHttpResponseHandler handler){
 		String apiUrl = getApiUrl("account/verify_credentials.json");
 		getClient().get(apiUrl, null, handler);
 	}
 
-	//GET statuses/verify_credentials
+	//GET users/show
 	public void getUserInfo(String screenname, AsyncHttpResponseHandler handler){
 		String apiUrl = getApiUrl("users/show.json");
 		//Specify the params
@@ -103,6 +111,35 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("screen_name", screenname);
 		getClient().get(apiUrl, params, handler);
 	}
+
+	public void postRetweet(long id, JsonHttpResponseHandler handler){
+		String apiUrl = getApiUrl("statuses/retweet.json");
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		getClient().post(apiUrl, params, handler);
+	}
+
+	public void postUnRetweet(long id, JsonHttpResponseHandler handler){
+		String apiUrl = getApiUrl("statuses/unretweet.json");
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		getClient().post(apiUrl, params, handler);
+	}
+
+	public void postFavorite(long id, JsonHttpResponseHandler handler){
+		String apiUrl = getApiUrl("favorites/create.json");
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		getClient().post(apiUrl, params, handler);
+	}
+
+	public void postUnFavorite(long id, JsonHttpResponseHandler handler){
+		String apiUrl = getApiUrl("favorites/destroy.json");
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		getClient().post(apiUrl, params, handler);
+	}
+
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
 	 * 	  i.e getApiUrl("statuses/home_timeline.json");

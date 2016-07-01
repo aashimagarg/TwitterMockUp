@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,6 +24,8 @@ import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+import com.codepath.apps.mysimpletweets.models.User;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -38,6 +41,8 @@ public class TimelineActivity extends AppCompatActivity {
     final int COMPOSE_REQUEST_CODE = 55;
     public ViewPager vpPager;
     public SmartFragmentStatePagerAdapter spPager;
+    User user;
+    TwitterClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,21 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        client = TwitterApplication.getRestClient();
+        client.getMyInfo(new JsonHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    user = User.fromJSON(response);
+                    Log.d("DEBUG", "USER WAS NULL");
+                }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG","went to on failure");
+                    Log.d("DEBUG",errorResponse.toString());
+                }
+            });
 
         // Display icon in the toolbar
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -107,6 +127,7 @@ public class TimelineActivity extends AppCompatActivity {
     public void onNewTweet(MenuItem mi){
         //Launch the compose view
         Intent i = new Intent(this, ComposeActivity.class);
+        i.putExtra("user", Parcels.wrap(user));
         startActivityForResult(i, COMPOSE_REQUEST_CODE);
     }
 
