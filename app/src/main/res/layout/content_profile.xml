@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.codepath.apps.mysimpletweets.ProfileActivity"
     tools:showIn="@layout/activity_profile">
@@ -35,10 +34,9 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:id="@+id/ivProfileImage"
-            android:background="#FFFF"
+            android:background="@drawable/profile_image_bg"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:padding="5dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="57dp" />
 
@@ -46,23 +44,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:textStyle="bold"
+            android:textColor="#000"
             android:id="@+id/tvName"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
             android:textSize="16sp"
             android:layout_below="@+id/ivProfileImage"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tagline"
+            android:text="@string/tagline"
             android:textSize="12sp"
             android:id="@+id/tvTagline"
             android:layout_below="@+id/tvScreenName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,9 +69,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:id="@+id/tvScreenName"
-            android:layout_below="@+id/tvName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_below="@+id/tvName" />
 
     </RelativeLayout>
 
@@ -82,7 +78,8 @@
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/rlUserHeader"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingBottom="10dp"
         android:background="#FFFF"
         android:layout_height="wrap_content">
 
@@ -105,14 +102,17 @@
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         app:pstsShouldExpand="true"
-        app:pstsTextAllCaps="true"
+        app:pstsTextAllCaps="false"
         app:pstsDividerColor="@android:color/transparent"
         android:layout_below="@+id/llCounts"
         android:background="#FFFF"
         android:textColor="#55acee"
+        android:textSize="14sp"
         app:pstsIndicatorColor="#55acee"
+        android:textStyle="normal"
+        android:layout_height="48dp"
         android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:foreground="?android:attr/selectableItemBackground" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

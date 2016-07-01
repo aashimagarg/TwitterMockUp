@@ -128,7 +128,7 @@ public class TimelineActivity extends AppCompatActivity {
     public void onNewTweet(MenuItem mi){
         //Launch the compose view
         Intent i = new Intent(this, ComposeActivity.class);
-        i.putExtra("user", Parcels.wrap(user));
+        //i.putExtra("screen_name", user.getScreenName());
         startActivityForResult(i, COMPOSE_REQUEST_CODE);
     }
 

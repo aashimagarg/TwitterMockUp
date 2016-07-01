@@ -101,6 +101,21 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
             }
         });
 
+        //set reply click listener
+        btnReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Fire an intent when a photo is selected
+                Intent i = new Intent(v.getContext(), ComposeActivity.class);
+                // Pass contact object in the bundle and populate details activity.
+                i.putExtra("screen_name", tweet.getUser().getScreenName());
+                v.getContext().startActivity(i);
+
+            }
+        });
+
+
         //set retweet click listener
         btnRetweet.setOnClickListener(new View.OnClickListener() {
                 @Override

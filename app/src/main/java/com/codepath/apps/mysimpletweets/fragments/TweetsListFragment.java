@@ -31,7 +31,7 @@ public class TweetsListFragment extends Fragment {
     protected ArrayList<Tweet> tweets;
     protected TweetsArrayAdapter aTweets;
     protected ListView lvTweets;
-    private SwipeRefreshLayout swipeContainer;
+    protected SwipeRefreshLayout swipeContainer;
 
     //1. inflation logic
     @Nullable
@@ -83,21 +83,5 @@ public class TweetsListFragment extends Fragment {
         // Send the network request to fetch the updated data
         TwitterClient client = TwitterApplication.getRestClient();
         // `client` here is an instance of Android Async HTTP
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                // Remember to CLEAR OUT old items before appending in the new ones
-                aTweets.clear();
-                // ...the data has come back, add new items to your adapter...
-                aTweets.addAll(Tweet.fromJSONArray(response));
-                // Now we call setRefreshing(false) to signal refresh has finished
-                swipeContainer.setRefreshing(false);
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-        });
     }
 }

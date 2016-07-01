@@ -61,4 +61,24 @@ public class UserTimelineFragment extends TweetsListFragment{
 
         });
     }
+    @Override
+    public void fetchTimelineAsync(int page) {
+        super.fetchTimelineAsync(page);
+        client.getUserTimeline((getArguments().getString("screen_name")), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                // Remember to CLEAR OUT old items before appending in the new ones
+                aTweets.clear();
+                // ...the data has come back, add new items to your adapter...
+                aTweets.addAll(Tweet.fromJSONArray(response));
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+    }
 }

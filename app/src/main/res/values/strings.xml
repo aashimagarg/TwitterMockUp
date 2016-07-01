@@ -14,5 +14,7 @@
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
     <string name="tweet">Tweet</string>
+    <string name="twittername">TwitterTweet</string>
+    <string name="tagline">Tagline</string>
 
 </resources>

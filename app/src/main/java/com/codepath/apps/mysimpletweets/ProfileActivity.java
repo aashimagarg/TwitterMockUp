@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets;
 
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
     TwitterClient client;
@@ -120,14 +122,20 @@ public class ProfileActivity extends AppCompatActivity {
         TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
         TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
         TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
+        TextView tvScreenname = (TextView) findViewById(R.id.tvScreenName);
         ImageView ivProfileBanner = (ImageView) findViewById(R.id.ivProfileBanner);
         ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+        tvScreenname.setText(user.getScreenName());
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());
         tvFollowers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
         tvFollowing.setText(String.valueOf(user.getFollowingsCount()) + " Following");
-        Picasso.with(this).load(user.getProfileBannerUrl()).into(ivProfileBanner);
-        Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
+        if (user.getProfileBannerUrl() != null) {
+            Picasso.with(this).load(user.getProfileBannerUrl()).into(ivProfileBanner);
+        } else {
+            ivProfileBanner.setBackgroundColor(Color.rgb(41, 156, 231));
+        }
+        Picasso.with(this).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
     }
 
     //Return the order of the fragments in the view pager

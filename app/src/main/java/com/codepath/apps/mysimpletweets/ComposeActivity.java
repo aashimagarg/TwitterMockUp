@@ -23,6 +23,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
@@ -40,6 +41,7 @@ public class ComposeActivity extends AppCompatActivity {
     TextView tvCount;
     Tweet tweet;
     User user;
+    String atName;
     static int MAX_COUNT = 140;
 
 
@@ -49,13 +51,38 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
-        user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
+        atName = getIntent().getStringExtra("screen_name");
 
+        client.getMyInfo(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                user = User.fromJSON(response);
+                setUpViews();
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    public void setUpViews(){
         ivProfilePic = (ImageView) findViewById(R.id.ivProfileImage);
         etTweet = (EditText) findViewById(R.id.etTweet);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         tvCount = (TextView) findViewById(R.id.tvCount);
-        Picasso.with(this).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfilePic);
+        Picasso.with(getApplicationContext()).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfilePic);
+
+        if (atName != null){
+            etTweet.setText(atName);
+            int cursor = atName.length() + 1;
+            etTweet.setSelection(cursor);
+        }
+
 
         // Attached Listener to Edit Text Widget
         etTweet.addTextChangedListener(new TextWatcher() {
@@ -72,10 +99,6 @@ public class ComposeActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     public void onCancel(View view){
