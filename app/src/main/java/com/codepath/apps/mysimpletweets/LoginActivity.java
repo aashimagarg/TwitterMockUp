@@ -13,21 +13,25 @@ import com.codepath.oauth.OAuthLoginActionBarActivity;
 
 import org.w3c.dom.Text;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 //where the user will sign into twitter
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
-	Button btnLogIn;
-	TextView welcome;
-	TextView welcomeMessage;
+	@BindView(R.id.btnLogin) Button btnLogIn;
+	@BindView(R.id.tvWelcome) TextView welcome;
+	@BindView(R.id.tvWelcomeMessage) TextView welcomeMessage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		ButterKnife.bind(this);
 
-		welcome = (TextView) findViewById(R.id.tvWelcome);
-		welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMessage);
-		btnLogIn = (Button) findViewById(R.id.btnLogin);
+		//welcome = (TextView) findViewById(R.id.tvWelcome);
+		//welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMessage);
+		//btnLogIn = (Button) findViewById(R.id.btnLogin);
 		Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/GothamNBold.otf");
 		Typeface tf2 = Typeface.createFromAsset(getAssets(),"fonts/GothamNBook.otf");
 

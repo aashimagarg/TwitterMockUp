@@ -77,22 +77,50 @@
         android:layout_height="20dp"
         android:background="@drawable/retweet_action"
         android:id="@+id/btnRetweet"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_alignTop="@+id/btnReply"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginEnd="70dp"
         android:layout_toRightOf="@+id/btnReply"
         android:layout_toEndOf="@+id/btnReply" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:id="@+id/tvRTCount"
+        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/btnRetweet"
+        android:layout_toEndOf="@+id/btnRetweet"
+        android:layout_alignBottom="@+id/btnRetweet"
+        android:layout_below="@+id/ivMedia" />
 
     <Button
         android:layout_width="15dp"
         android:layout_height="20dp"
         android:id="@+id/btnLike"
         android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/like_action"
-        android:layout_alignTop="@+id/btnRetweet"
-        android:layout_toRightOf="@+id/btnRetweet"
-        android:layout_toEndOf="@+id/btnRetweet" />
+        android:layout_alignTop="@+id/tvRTCount"
+        android:layout_toRightOf="@+id/tvRTCount"
+        android:layout_toEndOf="@+id/tvRTCount" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:id="@+id/tvLikeCount"
+        android:layout_below="@+id/ivMedia"
+        android:layout_marginRight="50dp"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="50dp"
+        android:layout_toRightOf="@+id/btnLike"
+        android:layout_toEndOf="@+id/btnLike"
+        android:layout_alignBottom="@+id/btnLike" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -107,5 +135,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp" />
+
+
 
 </RelativeLayout>

@@ -22,6 +22,9 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -30,8 +33,9 @@ import cz.msebera.android.httpclient.Header;
 public class TweetsListFragment extends Fragment {
     protected ArrayList<Tweet> tweets;
     protected TweetsArrayAdapter aTweets;
-    protected ListView lvTweets;
-    protected SwipeRefreshLayout swipeContainer;
+    @BindView(R.id.lvTweets) ListView lvTweets;
+    @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
+    private Unbinder unbinder;
 
     //1. inflation logic
     @Nullable
@@ -39,12 +43,13 @@ public class TweetsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tweets_list, container, false);
         //Find the list view
-        lvTweets = (ListView) v.findViewById(R.id.lvTweets);
+        unbinder = ButterKnife.bind(this, v);
+        //lvTweets = (ListView) v.findViewById(R.id.lvTweets);
         //Connect adapter to list view
         lvTweets.setAdapter(aTweets);
 
         // Lookup the swipe container view
-        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -84,4 +89,11 @@ public class TweetsListFragment extends Fragment {
         TwitterClient client = TwitterApplication.getRestClient();
         // `client` here is an instance of Android Async HTTP
     }
+    // When binding a fragment in onCreateView, set the views to null in onDestroyView.
+    // ButterKnife returns an Unbinder on the initial binding that has an unbind method to do this automatically.
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
 }

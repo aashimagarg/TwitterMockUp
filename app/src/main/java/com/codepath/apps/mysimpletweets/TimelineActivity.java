@@ -34,21 +34,28 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
 
     final int COMPOSE_REQUEST_CODE = 55;
-    public ViewPager vpPager;
     public SmartFragmentStatePagerAdapter spPager;
     User user;
     TwitterClient client;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs) PagerSlidingTabStrip tabStrip;
+    @BindView(R.id.viewpager) ViewPager vpPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         client = TwitterApplication.getRestClient();
@@ -72,13 +79,13 @@ public class TimelineActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);*/
 
         //Get the view pager
-        vpPager = (ViewPager) findViewById(R.id.viewpager);
+        //vpPager = (ViewPager) findViewById(R.id.viewpager);
         //creating smart pager adapter
         spPager = new TweetsPagerAdapter(getSupportFragmentManager());
         //Set the view pager adapter for the pager
         vpPager.setAdapter(spPager);
         //Find the pager sliding tabstrip
-        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        //PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         //Attach the pager tabstrip to the view pager
         tabStrip.setViewPager(vpPager);
     }

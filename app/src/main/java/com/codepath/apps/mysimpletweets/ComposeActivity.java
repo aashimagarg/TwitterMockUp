@@ -30,15 +30,18 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ComposeActivity extends AppCompatActivity {
     TwitterClient client;
-    EditText etTweet;
-    Button  btnCancel;
-    ImageView ivProfilePic;
-    TextView tvCount;
+    @BindView(R.id.etTweet) EditText etTweet;
+    @BindView(R.id.btnCancel) Button  btnCancel;
+    @BindView(R.id.ivProfileImage) ImageView ivProfilePic;
+    @BindView(R.id.tvCount) TextView tvCount;
+    //@BindView(R.id.toolbar) Toolbar toolbar;
     Tweet tweet;
     User user;
     String atName;
@@ -50,6 +53,8 @@ public class ComposeActivity extends AppCompatActivity {
         client = TwitterApplication.getRestClient();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+        ButterKnife.bind(this);
+
 
         atName = getIntent().getStringExtra("screen_name");
 
@@ -66,15 +71,15 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
     }
 
     public void setUpViews(){
-        ivProfilePic = (ImageView) findViewById(R.id.ivProfileImage);
-        etTweet = (EditText) findViewById(R.id.etTweet);
-        btnCancel = (Button) findViewById(R.id.btnCancel);
-        tvCount = (TextView) findViewById(R.id.tvCount);
+        //ivProfilePic = (ImageView) findViewById(R.id.ivProfileImage);
+        //etTweet = (EditText) findViewById(R.id.etTweet);
+        //btnCancel = (Button) findViewById(R.id.btnCancel);
+        //tvCount = (TextView) findViewById(R.id.tvCount);
         Picasso.with(getApplicationContext()).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfilePic);
 
         if (atName != null){
@@ -109,7 +114,7 @@ public class ComposeActivity extends AppCompatActivity {
 
     public void onSubmitTweet(View view){
 
-        etTweet = (EditText) findViewById(R.id.etTweet);
+       // etTweet = (EditText) findViewById(R.id.etTweet);
 
         client.postUpdate(etTweet.getText().toString(), new JsonHttpResponseHandler() {
             @Override

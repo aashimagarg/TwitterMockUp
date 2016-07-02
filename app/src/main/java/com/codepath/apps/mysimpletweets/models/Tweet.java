@@ -29,6 +29,8 @@ public class Tweet {
     public boolean isRetweeted;
     public boolean isFavorited;
     public String media;
+    public int rtCount;
+    public int likeCount;
 
     public Tweet(){
     }
@@ -45,6 +47,8 @@ public class Tweet {
             tweet.isFavorited = jsonObject.getBoolean("favorited");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            tweet.likeCount = jsonObject.getInt("favorite_count");
+            tweet.rtCount = jsonObject.getInt("retweet_count");
             JSONArray media = jsonObject.getJSONObject("entities").getJSONArray("media");
             tweet.media = media.getJSONObject(0).getString("media_url");
         } catch (JSONException e) {
@@ -104,6 +108,13 @@ public class Tweet {
         return media;
     }
 
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public int getRtCount() {
+        return rtCount;
+    }
 
 
 

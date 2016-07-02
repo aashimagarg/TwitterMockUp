@@ -32,22 +32,32 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
     TwitterClient client;
-    public ViewPager vpPager;
     public SmartFragmentStatePagerAdapter spPager;
     User user;
     String screenName;
 
+    @BindView(R.id.tvName) TextView tvName;
+    @BindView(R.id.tvTagline) TextView tvTagline;
+    @BindView(R.id.tvFollowers) TextView tvFollowers;
+    @BindView(R.id.tvFollowing) TextView tvFollowing;
+    @BindView(R.id.tvScreenName) TextView tvScreenname;
+    @BindView(R.id.ivProfileBanner) ImageView ivProfileBanner;
+    @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
+    @BindView(R.id.tabs) PagerSlidingTabStrip tabStrip;
+    @BindView(R.id.viewpager) ViewPager vpPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        ButterKnife.bind(this);
         client = TwitterApplication.getRestClient();
 
         client.getMyInfo(new JsonHttpResponseHandler() {
@@ -69,13 +79,13 @@ public class ProfileActivity extends AppCompatActivity {
         loadUserInfo(screenName);
 
         //Get the view pager
-        vpPager = (ViewPager) findViewById(R.id.viewpager);
+        //vpPager = (ViewPager) findViewById(R.id.viewpager);
         //creating smart pager adapter
         spPager = new TweetsPagerAdapter(getSupportFragmentManager());
         //Set the view pager adapter for the pager
         vpPager.setAdapter(spPager);
         //Find the pager sliding tabstrip
-        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        //PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         //Attach the pager tabstrip to the view pager
         tabStrip.setViewPager(vpPager);
 
@@ -118,13 +128,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void populateProfileHeader(User user) {
-        TextView tvName = (TextView) findViewById(R.id.tvName);
-        TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
-        TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
-        TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
-        TextView tvScreenname = (TextView) findViewById(R.id.tvScreenName);
-        ImageView ivProfileBanner = (ImageView) findViewById(R.id.ivProfileBanner);
-        ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+//        TextView tvName = (TextView) findViewById(R.id.tvName);
+//        TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
+//        TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
+//        TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
+//        TextView tvScreenname = (TextView) findViewById(R.id.tvScreenName);
+//        ImageView ivProfileBanner = (ImageView) findViewById(R.id.ivProfileBanner);
+//        ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+
         tvScreenname.setText(user.getScreenName());
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());

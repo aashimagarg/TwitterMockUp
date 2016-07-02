@@ -56,6 +56,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         TextView tvName = (TextView) convertView.findViewById(R.id.tvFullName);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
         TextView tvTime = (TextView) convertView.findViewById(R.id.tvTimeStamp);
+        final TextView tvRTCount = (TextView) convertView.findViewById(R.id.tvRTCount);
+        final TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
         Button btnReply = (Button) convertView.findViewById(R.id.btnReply);
         ImageView ivMedia = (ImageView) convertView.findViewById(R.id.ivMedia);
         final Button btnRetweet = (Button) convertView.findViewById(R.id.btnRetweet);
@@ -72,6 +74,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         tvName.setTypeface(tf2);
         tvBody.setText(tweet.getBody());
         tvBody.setTypeface(tf2);
+        tvRTCount.setText(String.valueOf(tweet.getRtCount()));
+        tvLikeCount.setText(String.valueOf(tweet.getLikeCount()));
 
         ivProfileImage.setImageResource(android.R.color.transparent);
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
@@ -136,6 +140,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 super.onSuccess(statusCode, headers, response);
                                 btnRetweet.setBackgroundResource(R.drawable.retweet_action_on);
+                                tweet.rtCount++;
+                                tvRTCount.setText(String.valueOf(tweet.getRtCount()));
                                 tweet.isRetweeted = true;
                                 //try to figure out how to make tweet appear on profile view without a refresh (in real time)
                             }
@@ -151,6 +157,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 super.onSuccess(statusCode, headers, response);
                                 btnRetweet.setBackgroundResource(R.drawable.retweet_action);
+                                tweet.rtCount--;
+                                tvRTCount.setText(String.valueOf(tweet.getRtCount()));
                                 tweet.isRetweeted = false;
                                 //try to figure out how to make tweet appear on profile view without a refresh (in real time)
                             }
@@ -176,6 +184,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
                             btnLike.setBackgroundResource(R.drawable.like_action_on);
+                            tweet.likeCount++;
+                            tvLikeCount.setText(String.valueOf(tweet.getLikeCount()));
                             tweet.isFavorited = true;
                             //try to figure out how to make tweet appear on profile view without a refresh (in real time)
                         }
@@ -191,6 +201,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
                             btnLike.setBackgroundResource(R.drawable.like_action);
+                            tweet.likeCount--;
+                            tvLikeCount.setText(String.valueOf(tweet.getLikeCount()));
                             tweet.isFavorited = false;
                             //try to figure out how to make tweet appear on profile view without a refresh (in real time)
                         }
