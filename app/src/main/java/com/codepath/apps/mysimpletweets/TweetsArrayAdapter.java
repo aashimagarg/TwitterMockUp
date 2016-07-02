@@ -78,12 +78,10 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
 
         //showing images of tweets - very hacky way.
         if (tweet.getMedia() != null){
-            ivMedia.getLayoutParams().height = 400;
+            ivMedia.setVisibility(View.VISIBLE);
             Picasso.with(getContext()).load(tweet.getMedia()).transform(new RoundedCornersTransformation(3, 3)).into(ivMedia);
         } else {
-            ivMedia.setImageResource(0);
-            ivMedia.getLayoutParams().height = 0;
-
+            ivMedia.setVisibility(View.GONE);
         }
 
         if (tweet.isRetweeted()){
